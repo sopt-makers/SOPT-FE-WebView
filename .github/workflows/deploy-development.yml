@@ -42,16 +42,6 @@ jobs:
           echo "log<<EOF" >> $GITHUB_OUTPUT
           echo "$(cat deploy.log)" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
-        working-directory: apps/web
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-
-      - name: Publish SSR Gateway
-        if: github.event_name == 'push'
-        run: |
-          yarn wrangler deploy -e preview
-        working-directory: apps/ssr-gateway
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
